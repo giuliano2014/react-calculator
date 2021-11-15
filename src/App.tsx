@@ -1,87 +1,158 @@
 
+import { useEffect, useState } from 'react'
 import { create, all } from 'mathjs'
-import { useState } from 'react';
-import './App.css';
+
+import './App.css'
+
+import KeyboardKey, { KeyboardKeyProps } from './components/KeyboardKey'
 
 const config = {}
 const math = create(all, config)
 
-function App() {
-  const [count, setCount] = useState("");
-  // const [currentButton, setCurrentButton] = useState('')
-  // const [total, setTotal] = useState('')
+const App = () => {
+  const [mathematicalExpression, setMathematicalExpression] = useState<string>('')
 
-  // console.log(math.evaluate('12 / (2.3 + 0.7)')) // 4
-  // console.log(math.evaluate('12 / 2 * 3')) // 18
-  // console.log(math.evaluate('1 + 2 * 3')) // 7
-  // console.log(math.evaluate('(1 + 2) * 3')) // 9
+  const keyboardKeys = [
+    {
+      label: 'AC',
+      onClick: () => clearLastCharacter(),
+    },
+    {
+      label: 'C',
+      onClick: () => resetMathematicalExpression(),
+    },
+    {
+      label: '%',
+      onClick: (e) => updapteMathematicalExpression(e),
+      value: '%'
+    },
+    {
+      label: '/',
+      onClick: (e) => updapteMathematicalExpression(e),
+      value: '/'
+    },
+    {
+      label: '7',
+      onClick: (e) => updapteMathematicalExpression(e),
+      value: '7'
+    },
+    {
+      label: '8',
+      onClick: (e) => updapteMathematicalExpression(e),
+      value: '8'
+    },
+    {
+      label: '9',
+      onClick: (e) => updapteMathematicalExpression(e),
+      value: '9'
+    },
+    {
+      label: '*',
+      onClick: (e) => updapteMathematicalExpression(e),
+      value: '*'
+    },
+    {
+      label: '4',
+      onClick: (e) => updapteMathematicalExpression(e),
+      value: '4'
+    },
+    {
+      label: '5',
+      onClick: (e) => updapteMathematicalExpression(e),
+      value: '5'
+    },
+    {
+      label: '6',
+      onClick: (e) => updapteMathematicalExpression(e),
+      value: '6'
+    },
+    {
+      label: '-',
+      onClick: (e) => updapteMathematicalExpression(e),
+      value: '-'
+    },
+    {
+      label: '1',
+      onClick: (e) => updapteMathematicalExpression(e),
+      value: '1'
+    },
+    {
+      label: '2',
+      onClick: (e) => updapteMathematicalExpression(e),
+      value: '2'
+    },
+    {
+      label: '3',
+      onClick: (e) => updapteMathematicalExpression(e),
+      value: '3'
+    },
+    {
+      label: '+',
+      onClick: (e) => updapteMathematicalExpression(e),
+      value: '+'
+    },
+    {
+      label: '0',
+      onClick: (e) => updapteMathematicalExpression(e),
+      value: '0'
+    },
+    {
+      label: '.',
+      onClick: (e) => updapteMathematicalExpression(e),
+      value: '.'
+    },
+    {
+      label: '=',
+      onClick: () => calculateTheResult(),
+      value: '='
+    },
+  ] as KeyboardKeyProps[]
 
-  // const handleClick = (e: any): void => {
-  //   setCount(count + e.target.value)
-  //   setCurrentButton(e.target.value);
-  //   setTotal(e.target.value)
+  useEffect(() => {
+    console.log('useEffect', typeof mathematicalExpression)
+  }, [mathematicalExpression])
 
-  //   if (
-  //     count.charAt(count.length-1) !== '+' && 
-  //     count.charAt(count.length-1) !== '-' &&
-  //     count.charAt(count.length-1) !== '*' &&
-  //     count.charAt(count.length-1) !== '/'
-  //   ) {
-  //     console.log("evaluate works on click", math.evaluate(count))
-  //     setTotal(math.evaluate(count))
-  //   }
-  // }
-
-  const handleClick = (e: any): void => {
-    setCount(count + e.target.value)
+  const calculateTheResult = (): void => {
+    if (!mathematicalExpression) return
+    setMathematicalExpression(math.evaluate(mathematicalExpression).toString())
+  }
+  
+  const clearLastCharacter = (): void => {
+    console.log('clearLastCharacter', typeof mathematicalExpression)
+    setMathematicalExpression(mathematicalExpression.slice(0, -1))
   }
 
-  const test = () => {
-    console.log('test', count)
-    console.log('test', math.evaluate(count))
-    setCount(math.evaluate(count))
+  const resetMathematicalExpression = (): void => {
+    setMathematicalExpression('')
+  }
+  
+  const updapteMathematicalExpression = (e: any): void => {
+    setMathematicalExpression(mathematicalExpression + e.target.value)
   }
 
   return (
     <div className="Container">
-    <div className="Calculator">
-      <input
-        type="text"
-        value={count}
-        onChange={e => setCount(e.target.value)}
-      />
-      {/* <input
-        type="text"
-        value={currentButton}
-        onChange={e => setCurrentButton(e.target.value)}
-      /> */}
-      {/* <input
-        type="text"
-        value={total}
-        onChange={e => setTotal(e.target.value)}
-      /> */}
-      <button>CL</button>
-      <button>DEL</button>
-      <button value="%" onClick={handleClick}>%</button>
-      <button value="/" onClick={handleClick}>/</button>
-      <button value="7" onClick={handleClick}>7</button>
-      <button value="8" onClick={handleClick}>8</button>
-      <button value="9" onClick={handleClick}>9</button>
-      <button value="*" onClick={handleClick}>*</button>
-      <button value="4" onClick={handleClick}>4</button>
-      <button value="5" onClick={handleClick}>5</button>
-      <button value="6" onClick={handleClick}>6</button>
-      <button value="-" onClick={handleClick}>-</button>
-      <button value="1" onClick={handleClick}>1</button>
-      <button value="2" onClick={handleClick}>2</button>
-      <button value="3" onClick={handleClick}>3</button>
-      <button value="+" onClick={handleClick}>+</button>
-      <button value="0" onClick={handleClick}>0</button>
-      <button value="," onClick={handleClick}>,</button>
-      <button className="Equal" value="=" onClick={test}>=</button>
+      <div className="Calculator">
+        <input
+          type="text"
+          placeholder="0"
+          value={mathematicalExpression}
+          onChange={e => setMathematicalExpression(e.target.value)}
+        />
+        {
+          keyboardKeys.map(({label, onClick, value}) => (
+            <KeyboardKey
+              key={label}
+              className={value === '=' ? 'Equal' : undefined} 
+              label={label}
+              onClick={onClick}
+              value={value}
+            />)
+          )
+        }
+      </div>
     </div>
-  </div>
-  );
+  )
 }
 
-export default App;
+export default App
