@@ -1,0 +1,4 @@
+.calculatorKeyboard {
+  display: grid;
+  grid-template-columns: repeat(4, 75px);
+}
