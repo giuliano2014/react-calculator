@@ -4,7 +4,8 @@ import { create, all } from 'mathjs'
 
 import './App.css'
 
-import KeyboardKey, { KeyboardKeyProps } from './components/KeyboardKey'
+import CalculatorKeyboard from './components/container/calculator/keyboard/CalculatorKeyboard'
+import { KeyboardKeyProps } from './components/designSystem/button/keyboard/KeyboardKey'
 
 const config = {}
 const math = create(all, config)
@@ -131,25 +132,16 @@ const App = () => {
   }
 
   return (
-    <div className="Container">
-      <div className="Calculator">
+    <div className="calculatorWrapper">
+      <div className="calculator">
         <input
+          className="calculatorScreen"
           type="text"
           placeholder="0"
           value={mathematicalExpression}
           onChange={e => setMathematicalExpression(e.target.value)}
         />
-        {
-          keyboardKeys.map(({label, onClick, value}) => (
-            <KeyboardKey
-              key={label}
-              className={value === '=' ? 'Equal' : undefined} 
-              label={label}
-              onClick={onClick}
-              value={value}
-            />)
-          )
-        }
+        <CalculatorKeyboard keyboardKeys={keyboardKeys} />
       </div>
     </div>
   )
