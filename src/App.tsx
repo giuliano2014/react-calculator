@@ -6,6 +6,7 @@ import './App.css'
 
 import CalculatorKeyboard from './components/container/calculator/keyboard/CalculatorKeyboard'
 import { KeyboardKeyProps } from './components/designSystem/button/keyboard/KeyboardKey'
+import VoiceCalculator from './components/designSystem/button/voice/VoiceButton'
 
 const config = {}
 const math = create(all, config)
@@ -143,6 +144,7 @@ const App = () => {
         />
         <CalculatorKeyboard keyboardKeys={keyboardKeys} />
       </div>
+      <VoiceCalculator />
     </div>
   )
 }
