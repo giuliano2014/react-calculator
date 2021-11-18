@@ -85,8 +85,8 @@ const VoiceButton = () => {
         {/* <button type="button" onClick={stopListening}>Stop</button> */}
       </div>
       <p>{transcript}</p>
-      {/* <p>Transcription : {transcript}</p>
-      <p>Message : {message}</p> */}
+      {/* <p>Transcription : {transcript}</p> */}
+      {/* <p>Message : {message}</p> */}
     </div>
   )
 }

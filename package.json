@@ -40,6 +40,14 @@
         "rules": {
           "import/no-anonymous-default-export": "off"
         }
+      },
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
       }
     ]
   },
@@ -62,6 +70,7 @@
     "@storybook/node-logger": "^6.3.12",
     "@storybook/preset-create-react-app": "^3.2.0",
     "@storybook/react": "^6.3.12",
-    "@types/react-speech-recognition": "^3.6.1"
+    "@types/react-speech-recognition": "^3.6.1",
+    "babel-loader": "8.1.0"
   }
 }
