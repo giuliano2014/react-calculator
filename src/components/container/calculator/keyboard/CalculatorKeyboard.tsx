@@ -1,6 +1,5 @@
 import { VFC } from 'react'
-
-import './styles.css'
+import { x } from '@xstyled/styled-components'
 
 import KeyboardKey, { KeyboardKeyProps } from '../../../designSystem/button/keyboard/KeyboardKey'
 
@@ -10,19 +9,23 @@ export type CalculatorKeyboardProps = {
 
 const CalculatorKeyboard: VFC<CalculatorKeyboardProps> = ({ keyboardKeys }) => {
   return (
-    <div className="calculatorKeyboard">
+    <x.div
+      display="grid"
+      gridTemplateColumns="repeat(4, 75px)"
+      marginTop="15px"
+    >
       {
         keyboardKeys.map(({label, onClick, value}) => (
           <KeyboardKey
             key={label}
-            className={value === '=' ? 'keyboardKeyLarge' : undefined} 
             label={label}
+            largeButton={value === '=' ? true : false} 
             onClick={onClick}
             value={value}
           />)
         )
       }
-    </div>
+    </x.div>
   )
 }
 

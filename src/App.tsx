@@ -1,12 +1,28 @@
 
 import { useEffect, useState } from 'react'
+import {
+  defaultTheme,
+  ThemeProvider,
+  Preflight,
+  x,
+  createGlobalStyle
+} from '@xstyled/styled-components'
 import { create, all } from 'mathjs'
-
-import './App.css'
 
 import CalculatorKeyboard from './components/container/calculator/keyboard/CalculatorKeyboard'
 import { KeyboardKeyProps } from './components/designSystem/button/keyboard/KeyboardKey'
 import VoiceCalculator from './components/designSystem/button/voice/VoiceButton'
+
+const theme = {
+  ...defaultTheme,
+  // Customize your theme here
+}
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: #e0e5ec;
+  }
+`
 
 const config = {}
 const math = create(all, config)
@@ -133,19 +149,42 @@ const App = () => {
   }
 
   return (
-    <div className="calculatorWrapper">
-      <div className="calculator">
-        <input
-          className="calculatorScreen"
-          type="text"
-          placeholder="0"
-          value={mathematicalExpression}
-          onChange={e => setMathematicalExpression(e.target.value)}
-        />
-        <CalculatorKeyboard keyboardKeys={keyboardKeys} />
-      </div>
-      <VoiceCalculator />
-    </div>
+    <ThemeProvider theme={theme}>
+      <Preflight />
+      <GlobalStyle />
+      <x.div
+        alignItems="center"
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        minHeight="100vh"
+      >
+        <x.div
+          borderRadius="10px"
+          boxShadow="5px 5px 10px #babecc, -5px -5px 10px #f2f3f5"
+          boxSizing="content-box"
+          display="flex"
+          flexDirection="column"
+          padding="15px"
+          w="300px"
+        >
+          <x.input
+            borderRadius="10px"
+            boxShadow="inset 5px 5px 10px #babecc, inset -5px -5px 10px #f2f3f5"
+            fontSize="50px"
+            outline="none" 
+            padding="10px"
+            textAlign="end"
+            type="text"
+            placeholder="0"
+            value={mathematicalExpression}
+            onChange={(e:any):void => setMathematicalExpression(e.target.value)}
+          />
+          <CalculatorKeyboard keyboardKeys={keyboardKeys} />
+        </x.div>
+        <VoiceCalculator />
+      </x.div>
+    </ThemeProvider>
   )
 }
 

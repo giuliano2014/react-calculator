@@ -1,17 +1,30 @@
 import { VFC } from 'react'
-
-import './styles.css'
+import { x } from '@xstyled/styled-components'
 
 export type KeyboardKeyProps = {
-  className?: string
   label: string
+  largeButton?: boolean
   onClick: (e: any) => void
   value?: string
 }
 
-const KeyboardKey: VFC<KeyboardKeyProps> = ({ className, label, onClick, value })  => {
+const KeyboardKey: VFC<KeyboardKeyProps> = ({ label, largeButton, onClick, value })  => {
   return (
-    <button className={`keyboardKey ${className}`} value={value} onClick={onClick}>{label}</button>
+    <x.button
+      bg={{ _: '', hover: '#babecc' }}
+      border="none"
+      borderRadius={largeButton ? '10px' : '50%'}
+      boxShadow="5px 5px 10px #babecc, -5px -5px 10px #f2f3f5"
+      cursor="pointer"
+      h="60px"
+      margin="8px"
+      outline={{ focus: 'none' }}
+      w={largeButton ? '132px' : '60px'}
+      value={value}
+      onClick={onClick}
+    >
+      {label}
+    </x.button>
   )
 }
 
