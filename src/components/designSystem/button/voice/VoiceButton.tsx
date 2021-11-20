@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { x } from '@xstyled/styled-components'
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { MdKeyboardVoice } from 'react-icons/md';
+import { useEffect, useState } from 'react'
+import styled, { x } from '@xstyled/styled-components'
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
+import { MdKeyboardVoice } from 'react-icons/md'
 
 interface Command {
   command: string | string[] | RegExp
@@ -11,6 +11,18 @@ interface Command {
   fuzzyMatchingThreshold?: number | undefined
   bestMatchOnly?: boolean | undefined
 }
+
+const Content = styled.divBox`
+  p {
+    color: text;
+  }
+
+  .voiceIcon {
+    color: text;
+    cursor: pointer;
+    font-size: 50px;
+  }
+`;
 
 const VoiceButton = () => {
   const [message, setMessage] = useState('')
@@ -54,7 +66,7 @@ const VoiceButton = () => {
     listening,
   } = useSpeechRecognition({ commands })
 
-  const { browserSupportsSpeechRecognition, startListening, stopListening } = SpeechRecognition
+  const { browserSupportsSpeechRecognition, startListening } = SpeechRecognition
 
   useEffect(() => {
     if (finalTranscript !== '') {
@@ -74,29 +86,35 @@ const VoiceButton = () => {
   }
 
   return (
-    <x.div
+    <Content
       alignItems="center"
       display="flex"
       flexDirection="column"
       paddingTop="50px"
     >
       <p>{listening ? 'Parlez' : 'Cliquez sur le bouton'}</p>
-      {/* <p>Listening : {listening ? 'on' : 'off'}</p> */}
-      <div>
-        {/* <button type="button" onClick={resetTranscript}>Reset</button>
-        <button type="button" onClick={listenContinuously}>Listen</button> */}
+      <x.div
+        position="relative"
+      >
+        {listening &&
+          <x.div
+            backgroundColor="red"
+            borderRadius="50%"
+            h="10px"
+            position="absolute"
+            right="15px"
+            top="2px"
+            w="10px"
+          ></x.div>
+        }
         <MdKeyboardVoice
-          color={listening ? 'black' : '#c1c1c1'}
-          cursor='pointer'
-          fontSize='50px'
+          className="voiceIcon"
           onClick={listenContinuously}
         />
-        {/* <button type="button" onClick={stopListening}>Stop</button> */}
-      </div>
+      </x.div>
       <p>{transcript}</p>
-      {/* <p>Transcription : {transcript}</p> */}
-      {/* <p>Message : {message}</p> */}
-    </x.div>
+      <p>Message : {message}</p>
+    </Content>
   )
 }
 

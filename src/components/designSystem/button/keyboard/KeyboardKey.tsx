@@ -11,7 +11,7 @@ export type KeyboardKeyProps = {
 const KeyboardKey: VFC<KeyboardKeyProps> = ({ label, largeButton, onClick, value })  => {
   return (
     <x.button
-      bg={{ _: '', hover: '#babecc' }}
+      bg={{ _: '#e1e9fa', hover: '#d7e1f9' }}
       border="none"
       borderRadius={largeButton ? '10px' : '50%'}
       boxShadow="5px 5px 10px #babecc, -5px -5px 10px #f2f3f5"
