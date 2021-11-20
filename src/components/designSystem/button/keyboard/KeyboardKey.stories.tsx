@@ -13,16 +13,16 @@ const Template: Story<KeyboardKeyProps> = (args) => <KeyboardKey {...args} />
 export const Default = Template.bind({});
 
 Default.args = {
-  className: undefined,
   label: '9',
+  largeButton: false,
   onClick: action('La touche "9" a été cliquée'),
   value: '9',
 };
 
-export const Large = Template.bind({});
+export const largeButton = Template.bind({});
 
-Large.args = {
-  className: 'keyboardKeyLarge',
+largeButton.args = {
+  largeButton: true,
   label: '=',
   onClick: action('La touche "=" a été cliquée'),
   value: '=',

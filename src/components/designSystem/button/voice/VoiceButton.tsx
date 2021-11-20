@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
+import { x } from '@xstyled/styled-components'
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { MdKeyboardVoice } from 'react-icons/md';
-
-import './styles.css'
 
 interface Command {
   command: string | string[] | RegExp
@@ -75,19 +74,29 @@ const VoiceButton = () => {
   }
 
   return (
-    <div className="voiceButton">
+    <x.div
+      alignItems="center"
+      display="flex"
+      flexDirection="column"
+      paddingTop="50px"
+    >
       <p>{listening ? 'Parlez' : 'Cliquez sur le bouton'}</p>
       {/* <p>Listening : {listening ? 'on' : 'off'}</p> */}
       <div>
         {/* <button type="button" onClick={resetTranscript}>Reset</button>
         <button type="button" onClick={listenContinuously}>Listen</button> */}
-        <MdKeyboardVoice style={{color: listening ? 'black' : '#c1c1c1', fontSize: '50px', cursor: 'pointer'}} onClick={listenContinuously} />
+        <MdKeyboardVoice
+          color={listening ? 'black' : '#c1c1c1'}
+          cursor='pointer'
+          fontSize='50px'
+          onClick={listenContinuously}
+        />
         {/* <button type="button" onClick={stopListening}>Stop</button> */}
       </div>
       <p>{transcript}</p>
       {/* <p>Transcription : {transcript}</p> */}
       {/* <p>Message : {message}</p> */}
-    </div>
+    </x.div>
   )
 }
 
