@@ -1,28 +1,25 @@
 
 import { useEffect, useState } from 'react'
-import {
-  defaultTheme,
-  ThemeProvider,
-  Preflight,
-  x,
-  createGlobalStyle
-} from '@xstyled/styled-components'
+import styled, { x } from '@xstyled/styled-components'
 import { create, all } from 'mathjs'
 
 import CalculatorKeyboard from './components/container/calculator/keyboard/CalculatorKeyboard'
 import { KeyboardKeyProps } from './components/designSystem/button/keyboard/KeyboardKey'
 import VoiceCalculator from './components/designSystem/button/voice/VoiceButton'
+import DarkModeToggle from './components/designSystem/button/darkmode/DarkModeToggle'
 
-const theme = {
-  ...defaultTheme,
-  // Customize your theme here
-}
+export const Navbar = styled.headerBox`
+  background-color: bg;
+  display: flex;
+  padding: 4;
+  position: fixed;
+  top: 0;
+  width: 100%;
+`;
 
-const GlobalStyle = createGlobalStyle`
-  body {
-    background-color: #e0e5ec;
-  }
-`
+export const Main = styled.mainBox`
+  background-color: bg;
+`;
 
 const config = {}
 const math = create(all, config)
@@ -149,10 +146,11 @@ const App = () => {
   }
 
   return (
-    <ThemeProvider theme={theme}>
-      <Preflight />
-      <GlobalStyle />
-      <x.div
+    <>
+      <Navbar>
+        <DarkModeToggle />
+      </Navbar>
+      <Main
         alignItems="center"
         display="flex"
         flexDirection="column"
@@ -183,8 +181,8 @@ const App = () => {
           <CalculatorKeyboard keyboardKeys={keyboardKeys} />
         </x.div>
         <VoiceCalculator />
-      </x.div>
-    </ThemeProvider>
+      </Main>
+    </>
   )
 }
 
