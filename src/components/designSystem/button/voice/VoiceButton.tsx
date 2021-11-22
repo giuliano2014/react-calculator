@@ -56,6 +56,10 @@ const VoiceButton = () => {
       command: 'I would like to order *',
       callback: (food) => setMessage(`Your order is for: ${food}`)
     },
+    {
+      command: 'ok sto combien fait *',
+      callback: (mathematicalExpression) => setMessage(`Expression mathématique à calculer : ${mathematicalExpression}`)
+    },
   ] as Command[]
 
   const {
@@ -90,10 +94,10 @@ const VoiceButton = () => {
       alignItems="center"
       display="flex"
       flexDirection="column"
-      paddingTop="50px"
     >
-      <p>{listening ? 'Parlez' : 'Cliquez sur le bouton'}</p>
+      <x.p paddingTop={{ _: 30, sm: 50 }}>{listening ? 'Dites: "Ok Sto, combien font : 1 + 3 x 6"' : 'Cliquez sur le bouton'}</x.p>
       <x.div
+        marginTop="25"
         position="relative"
       >
         {listening &&
@@ -113,7 +117,9 @@ const VoiceButton = () => {
         />
       </x.div>
       <p>{transcript}</p>
-      <p>Message : {message}</p>
+      {message &&
+        <p>Message : {message}</p>
+      }
     </Content>
   )
 }
