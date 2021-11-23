@@ -5,7 +5,7 @@ import { create, all } from 'mathjs'
 
 import CalculatorKeyboard from './components/container/calculator/keyboard/CalculatorKeyboard'
 import { KeyboardKeyProps } from './components/designSystem/button/keyboard/KeyboardKey'
-import VoiceCalculator from './components/designSystem/button/voice/VoiceButton'
+import VoiceButton from './components/designSystem/button/voice/VoiceButton'
 import DarkModeToggle from './components/designSystem/button/darkmode/DarkModeToggle'
 
 const AppWrapper = styled.divBox`
@@ -184,7 +184,7 @@ const App = () => {
           />
           <CalculatorKeyboard keyboardKeys={keyboardKeys} />
         </Calculator>
-        <VoiceCalculator />
+        <VoiceButton setMathematicalExpression={setMathematicalExpression} />
       </x.div>
     </AppWrapper>
   )
