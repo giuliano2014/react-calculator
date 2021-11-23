@@ -10,18 +10,19 @@ import {
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 
-const theme = {
+export const theme = {
   ...defaultTheme,
   colors: {
     bg: "#e1e9fa",
-    text: "#333",
+    text: "#14192b",
+
     modes: {
       dark: {
-        bg: "#0f172aff",
-        text: "#dfdfdf",
+        bg: "black",
+        text: "white",
       }
     }
-  }
+  },
 }
 
 ReactDOM.render(

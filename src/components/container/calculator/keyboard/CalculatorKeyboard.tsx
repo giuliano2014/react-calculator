@@ -11,7 +11,8 @@ const CalculatorKeyboard: VFC<CalculatorKeyboardProps> = ({ keyboardKeys }) => {
   return (
     <x.div
       display="grid"
-      gridTemplateColumns="repeat(4, 75px)"
+      gridTemplateColumns={4}
+      gap="10px"
       marginTop="15px"
     >
       {
@@ -19,7 +20,7 @@ const CalculatorKeyboard: VFC<CalculatorKeyboardProps> = ({ keyboardKeys }) => {
           <KeyboardKey
             key={label}
             label={label}
-            largeButton={value === '=' ? true : false} 
+            largeButton={value === '=' ? true : false}
             onClick={onClick}
             value={value}
           />)

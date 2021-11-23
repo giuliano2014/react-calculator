@@ -8,17 +8,18 @@ import { KeyboardKeyProps } from './components/designSystem/button/keyboard/Keyb
 import VoiceCalculator from './components/designSystem/button/voice/VoiceButton'
 import DarkModeToggle from './components/designSystem/button/darkmode/DarkModeToggle'
 
-export const Navbar = styled.headerBox`
+const AppWrapper = styled.divBox`
   background-color: bg;
   display: flex;
-  padding: 4;
-  position: fixed;
-  top: 0;
-  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px 0;
 `;
-
-export const Main = styled.mainBox`
-  background-color: bg;
+  
+const Calculator = styled.divBox`
+  background-color: #e1e9fa;
+  box-shadow: 5px 5px 10px #babecc,-5px -5px 10px #f2f3f5;
 `;
 
 const config = {}
@@ -146,21 +147,17 @@ const App = () => {
   }
 
   return (
-    <>
-      <Navbar>
-        <DarkModeToggle />
-      </Navbar>
-      <Main
+    <AppWrapper>
+      <DarkModeToggle />
+      <x.div
         alignItems="center"
         display="flex"
         flexDirection="column"
-        justifyContent="center"
-        minHeight="100vh"
+        marginTop="30px"
       >
-        <x.div
+        <Calculator
           borderRadius="10px"
-          boxShadow="5px 5px 10px #babecc, -5px -5px 10px #f2f3f5"
-          boxSizing="content-box"
+          boxSizing="border-box"
           display="flex"
           flexDirection="column"
           padding="15px"
@@ -169,6 +166,7 @@ const App = () => {
           <x.input
             borderRadius="10px"
             boxShadow="inset 5px 5px 10px #babecc, inset -5px -5px 10px #f2f3f5"
+            color={{_ : '#14192b', placeholder : '#14192b'}}
             fontSize="50px"
             outline="none" 
             padding="10px"
@@ -179,10 +177,10 @@ const App = () => {
             onChange={(e:any):void => setMathematicalExpression(e.target.value)}
           />
           <CalculatorKeyboard keyboardKeys={keyboardKeys} />
-        </x.div>
+        </Calculator>
         <VoiceCalculator />
-      </Main>
-    </>
+      </x.div>
+    </AppWrapper>
   )
 }
 

@@ -4,7 +4,8 @@ import Toggle from "./Toogle"
 
 const InnerDarkModeToggle = styled.navBox`
   display: flex;
-  margin: 0 auto;
+  justify-content: center;
+  padding: 4;
 
   & > button {
     background: none;
@@ -15,7 +16,7 @@ const InnerDarkModeToggle = styled.navBox`
     transition: color 0.3s ease;
     
     &:last-child {
-      color: #666;
+      color: #555;
     }
 
     &:focus {
