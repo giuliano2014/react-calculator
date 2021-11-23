@@ -22,10 +22,8 @@ const Calculator = styled.divBox`
   box-shadow: 5px 5px 10px #babecc,-5px -5px 10px #f2f3f5;
 `;
 
-const config = {}
-const math = create(all, config)
-
 const App = () => {
+  const math = create(all)
   const [mathematicalExpression, setMathematicalExpression] = useState<string>('')
 
   const keyboardKeys = [
@@ -130,7 +128,15 @@ const App = () => {
 
   const calculateTheResult = (): void => {
     if (!mathematicalExpression) return
-    setMathematicalExpression(math.evaluate(mathematicalExpression).toString())
+
+    try {
+      const result = math.evaluate(mathematicalExpression)
+      const roundResult = math.round(result, 2)
+
+      setMathematicalExpression(math.evaluate(roundResult).toString())
+    } catch(error) {
+      setMathematicalExpression('Error')
+    }
   }
   
   const clearLastCharacter = (): void => {
