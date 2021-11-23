@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, VFC } from 'react'
 import styled, { x } from '@xstyled/styled-components'
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 import { MdKeyboardVoice } from 'react-icons/md'
@@ -10,6 +10,10 @@ interface Command {
   matchInterim?: boolean | undefined
   fuzzyMatchingThreshold?: number | undefined
   bestMatchOnly?: boolean | undefined
+}
+
+type VoiceButtonProps = {
+  setMathematicalExpression: (value: string) => void
 }
 
 const Content = styled.divBox`
@@ -24,40 +28,23 @@ const Content = styled.divBox`
   }
 `;
 
-const VoiceButton = () => {
+const VoiceButton: VFC<VoiceButtonProps> = ({ setMathematicalExpression }) => {
   const [message, setMessage] = useState('')
 
   const commands = [
     {
-      command: 'reset',
-      callback: () => resetTranscript()
-    },
-    {
-      command: 'shut up',
-      callback: () => setMessage('I wasn\'t talking.')
-    },
-    {
-      command: 'Hello',
-      callback: () => setMessage('Hi there!')
-    },
-    {
-      command: 'Ok *',
-      callback: (food) => setMessage(`Ok: ${food}`)
-    },
-    {
-      command: 'Ok Stoïk combien fait *',
-      callback: (food) => setMessage(`String à calculer: ${food}`)
+      command: 'ok *',
+      callback: (mathematicalExpression) => {
+        setMessage(`Ok: ${mathematicalExpression}`)
+        setMathematicalExpression(mathematicalExpression)
+      }
     },
     {
       command: 'stoik *',
-      callback: (food) => setMessage(`String à calculer: ${food}`)
+      callback: (mathematicalExpression) => setMessage(`String à calculer: ${mathematicalExpression}`)
     },
     {
-      command: 'I would like to order *',
-      callback: (food) => setMessage(`Your order is for: ${food}`)
-    },
-    {
-      command: 'ok sto combien fait *',
+      command: 'ok sto combien font *',
       callback: (mathematicalExpression) => setMessage(`Expression mathématique à calculer : ${mathematicalExpression}`)
     },
   ] as Command[]
@@ -66,7 +53,6 @@ const VoiceButton = () => {
     transcript,
     interimTranscript,
     finalTranscript,
-    resetTranscript,
     listening,
   } = useSpeechRecognition({ commands })
 
@@ -74,7 +60,7 @@ const VoiceButton = () => {
 
   useEffect(() => {
     if (finalTranscript !== '') {
-      console.log('Got final result:', finalTranscript)
+      console.log('Got final result : ', finalTranscript)
     }
   }, [interimTranscript, finalTranscript])
 
