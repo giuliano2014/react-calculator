@@ -123,7 +123,13 @@ const App = () => {
   ] as KeyboardKeyProps[]
 
   useEffect(() => {
-    console.log('useEffect', typeof mathematicalExpression)
+    // console.log('useEffect', typeof mathematicalExpression)
+    console.log('mathematicalExpression', mathematicalExpression)
+    checkForOnlyNumberDecimalComma('123,.+-525*4244/')
+    checkForOnlyNumberDecimalComma('123 , .')
+    checkForOnlyNumberDecimalComma('123')
+    checkForOnlyNumberDecimalComma('Adc')
+    checkForOnlyNumberDecimalComma('adc123')
   }, [mathematicalExpression])
 
   const calculateTheResult = (): void => {
@@ -151,6 +157,18 @@ const App = () => {
   const updapteMathematicalExpression = (e: any): void => {
     setMathematicalExpression(mathematicalExpression + e.target.value)
   }
+
+  const checkForOnlyNumberDecimalComma = (value: string): void => 
+{
+if(/^[0-9,./+-/*/ ]+$/.test(value))
+    {
+        console.log("String contains only numbers, decimal and comma")
+    }
+    else
+    {
+        console.log("String does not contain only numbers, decimal and comma") 
+    }
+}
 
   return (
     <AppWrapper>
