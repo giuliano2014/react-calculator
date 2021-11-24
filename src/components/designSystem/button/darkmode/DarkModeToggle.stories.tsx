@@ -17,5 +17,4 @@ export default {
 } as Meta
 
 const Template: Story = () => <DarkModeToggle />
-
 export const Default = Template.bind({})

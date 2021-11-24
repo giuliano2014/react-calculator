@@ -5,9 +5,9 @@ import styled, { x } from '@xstyled/styled-components'
 import { create, all } from 'mathjs'
 
 import CalculatorKeyboard from './components/container/calculator/keyboard/CalculatorKeyboard'
+import DarkModeToggle from './components/designSystem/button/darkmode/DarkModeToggle'
 import { KeyboardKeyProps } from './components/designSystem/button/keyboard/KeyboardKey'
 import VoiceButton from './components/designSystem/button/voice/VoiceButton'
-import DarkModeToggle from './components/designSystem/button/darkmode/DarkModeToggle'
 
 const AppWrapper = styled.divBox`
   background-color: bg;

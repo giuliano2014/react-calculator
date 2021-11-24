@@ -1,5 +1,5 @@
 import { VFC } from 'react'
-import styled, { x } from "@xstyled/styled-components"
+import styled, { x } from '@xstyled/styled-components'
 
 type ToggleProps = {
   checked: boolean
@@ -39,23 +39,21 @@ const InputCheck = styled.inputBox`
   }
 `
 
-const Toggle: VFC<ToggleProps> = ({ checked, onChange }) => {
-  return (
-    <x.div
-      alignItems="center"
-      display="flex"
-      padding="0 1"
-      position="relative"
-    >
-      <InputCheck
-        id="dmcheck"
-        type="checkbox"
-        checked={checked}
-        onChange={onChange}
-      />
-      <label htmlFor="dmcheck" />
-    </x.div>
-  )
-}
+const Toggle: VFC<ToggleProps> = ({ checked, onChange }) => (
+  <x.div
+    alignItems="center"
+    display="flex"
+    padding="0 1"
+    position="relative"
+  >
+    <InputCheck
+      id="dmcheck"
+      type="checkbox"
+      checked={checked}
+      onChange={onChange}
+    />
+    <label htmlFor="dmcheck" />
+  </x.div>
+)
 
 export default Toggle

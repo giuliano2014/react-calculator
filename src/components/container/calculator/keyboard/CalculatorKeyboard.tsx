@@ -7,27 +7,25 @@ export type CalculatorKeyboardProps = {
   keyboardKeys: KeyboardKeyProps[]
 }
 
-const CalculatorKeyboard: VFC<CalculatorKeyboardProps> = ({ keyboardKeys }) => {
-  return (
-    <x.div
-      display="grid"
-      gridTemplateColumns={4}
-      gap="10px"
-      marginTop="15px"
-    >
-      {
-        keyboardKeys.map(({label, onClick, value}) => (
-          <KeyboardKey
-            key={label}
-            label={label}
-            largeButton={value === '=' ? true : false}
-            onClick={onClick}
-            value={value}
-          />)
-        )
-      }
-    </x.div>
-  )
-}
+const CalculatorKeyboard: VFC<CalculatorKeyboardProps> = ({ keyboardKeys }) => (
+  <x.div
+    display="grid"
+    gridTemplateColumns={4}
+    gap="10px"
+    marginTop="15px"
+  >
+    {
+      keyboardKeys.map(({label, onClick, value}) => (
+        <KeyboardKey
+          key={label}
+          label={label}
+          largeButton={value === '=' ? true : false}
+          onClick={onClick}
+          value={value}
+        />)
+      )
+    }
+  </x.div>
+)
 
 export default CalculatorKeyboard

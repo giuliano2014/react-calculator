@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {
+  ColorModeProvider,
   defaultTheme,
-  ThemeProvider,
   Preflight,
-  ColorModeProvider
+  ThemeProvider,
 } from '@xstyled/styled-components'
 
 import App from './App'
@@ -13,15 +13,15 @@ import reportWebVitals from './reportWebVitals'
 export const theme = {
   ...defaultTheme,
   colors: {
-    bg: "#e1e9fa",
-    text: "#14192b",
+    bg: '#e1e9fa',
+    text: '#14192b',
 
     modes: {
       dark: {
-        bg: "black",
-        text: "white",
-      }
-    }
+        bg: 'black',
+        text: 'white',
+      },
+    },
   },
 }
 
