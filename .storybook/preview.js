@@ -1,7 +1,7 @@
 import {
-  ThemeProvider,
+  ColorModeProvider,
   Preflight,
-  ColorModeProvider
+  ThemeProvider,
 } from '@xstyled/styled-components'
 
 import { theme } from '../src/index'
