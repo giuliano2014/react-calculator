@@ -1,6 +1,5 @@
 
-import { useEffect, useState } from 'react'
-// import { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled, { x } from '@xstyled/styled-components'
 import { create, all } from 'mathjs'
 
@@ -147,29 +146,6 @@ const App = () => {
       setMathematicalExpression('Error')
     }
   }
-
-  // const calculateTheResult = useCallback((): void => {
-  //   if (!mathematicalExpression) return
-
-  //   try {
-  //     const formatMathematicalExpression = mathematicalExpression.replaceAll('x', '*').replaceAll(',', '.')
-  //     const result = math.evaluate(formatMathematicalExpression)
-  //     const roundResult = math.round(result, 2)
-  //     const finalResult = roundResult.toString().replace('.', ',')
-
-  //     setMathematicalExpression(finalResult)
-  //   } catch(error) {
-  //     setMathematicalExpression('Error')
-  //   }
-  // }, [math, mathematicalExpression])
-
-  // useEffect(() => {
-  //   if (isThisVoiceButtonRequest) setTimeout(calculateTheResult, 1500)
-
-  //   return () => {
-  //     setIsThisVoiceButtonRequest(false)
-  //   }
-  // }, [isThisVoiceButtonRequest])
   
   const clearLastCharacter = (): void => {
     setMathematicalExpression(mathematicalExpression.slice(0, -1))
@@ -179,7 +155,7 @@ const App = () => {
     setMathematicalExpression('')
   }
   
-  const updapteMathematicalExpression = (e: any): void => {
+  const updapteMathematicalExpression = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setMathematicalExpression(mathematicalExpression + e.target.value)
   }
 
