@@ -130,6 +130,7 @@ const App = () => {
     return () => {
       setIsThisVoiceButtonRequest(false)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isThisVoiceButtonRequest])
 
   const calculateTheResult = (): void => {
