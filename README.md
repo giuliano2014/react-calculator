@@ -1,7 +1,13 @@
 # Getting Started with Super Calculator
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-Another used librairies : [TypeScript](https://www.typescriptlang.org/) | [xstyled](https://xstyled.dev/) | [Storybook](https://storybook.js.org/) | [react-speech-recognition](https://github.com/JamesBrill/react-speech-recognition) | [react-icons](https://react-icons.github.io/react-icons)
+
+Here are the other libraries used for this project : 
+[TypeScript](https://www.typescriptlang.org/)
+[xstyled](https://xstyled.dev/)
+[Storybook](https://storybook.js.org/)
+[react-speech-recognition](https://github.com/JamesBrill/react-speech-recognition)
+[react-icons](https://react-icons.github.io/react-icons)
 
 ## Available Scripts
 
