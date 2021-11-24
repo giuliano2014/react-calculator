@@ -1,4 +1,4 @@
-import { useEffect, useState, VFC } from 'react'
+import { VFC } from 'react'
 import styled, { x } from '@xstyled/styled-components'
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
 import { MdKeyboardVoice } from 'react-icons/md'
@@ -13,6 +13,7 @@ interface Command {
 }
 
 type VoiceButtonProps = {
+  setIsThisVoiceButtonRequest: (value: boolean) => void
   setMathematicalExpression: (value: string) => void
 }
 
@@ -28,41 +29,22 @@ const Content = styled.divBox`
   }
 `;
 
-const VoiceButton: VFC<VoiceButtonProps> = ({ setMathematicalExpression }) => {
-  const [message, setMessage] = useState('')
+const VoiceButton: VFC<VoiceButtonProps> = ({ setIsThisVoiceButtonRequest, setMathematicalExpression }) => {
 
   const commands = [
     {
-      command: 'ok *',
+      command: 'super calculatrice combien font *',
       callback: (mathematicalExpression) => {
-        setMessage(`Ok: ${mathematicalExpression}`)
-        setMathematicalExpression(mathematicalExpression)
+        const formatMathematicalExpression = mathematicalExpression.replaceAll(' ', '')
+        setMathematicalExpression(formatMathematicalExpression)
+        setIsThisVoiceButtonRequest(true)
       }
-    },
-    {
-      command: 'stoik *',
-      callback: (mathematicalExpression) => setMessage(`String à calculer: ${mathematicalExpression}`)
-    },
-    {
-      command: 'ok sto combien font *',
-      callback: (mathematicalExpression) => setMessage(`Expression mathématique à calculer : ${mathematicalExpression}`)
     },
   ] as Command[]
 
-  const {
-    transcript,
-    interimTranscript,
-    finalTranscript,
-    listening,
-  } = useSpeechRecognition({ commands })
+  const { listening } = useSpeechRecognition({ commands })
 
   const { browserSupportsSpeechRecognition, startListening } = SpeechRecognition
-
-  useEffect(() => {
-    if (finalTranscript !== '') {
-      console.log('Got final result : ', finalTranscript)
-    }
-  }, [interimTranscript, finalTranscript])
 
   if (!browserSupportsSpeechRecognition()) {
     console.log('Your browser does not support speech recognition software ! Try Chrome desktop, maybe ?')
@@ -81,7 +63,7 @@ const VoiceButton: VFC<VoiceButtonProps> = ({ setMathematicalExpression }) => {
       display="flex"
       flexDirection="column"
     >
-      <x.p paddingTop={{ _: 30, sm: 50 }}>{listening ? 'Dites: "Ok Sto, combien font : 1 + 3 x 6"' : 'Cliquez sur le bouton'}</x.p>
+      <x.p paddingTop={{ _: 30, sm: 50 }}>{listening ? 'Dites: "Super calculatrice, combien font : 2 + 3 x 5"' : 'Cliquez sur le bouton'}</x.p>
       <x.div
         marginTop="25"
         position="relative"
@@ -102,10 +84,6 @@ const VoiceButton: VFC<VoiceButtonProps> = ({ setMathematicalExpression }) => {
           onClick={listenContinuously}
         />
       </x.div>
-      <p>{transcript}</p>
-      {message &&
-        <p>Message : {message}</p>
-      }
     </Content>
   )
 }

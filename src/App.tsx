@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from 'react'
+// import { useCallback, useEffect, useState } from 'react'
 import styled, { x } from '@xstyled/styled-components'
 import { create, all } from 'mathjs'
 
@@ -25,6 +26,7 @@ const Calculator = styled.divBox`
 const App = () => {
   const math = create(all)
   const [mathematicalExpression, setMathematicalExpression] = useState<string>('')
+  const [isThisVoiceButtonRequest, setIsThisVoiceButtonRequest] = useState<boolean>(false)
 
   const keyboardKeys = [
     {
@@ -61,9 +63,9 @@ const App = () => {
       value: '9'
     },
     {
-      label: '*',
+      label: 'x',
       onClick: (e) => updapteMathematicalExpression(e),
-      value: '*'
+      value: 'x'
     },
     {
       label: '4',
@@ -111,9 +113,9 @@ const App = () => {
       value: '0'
     },
     {
-      label: '.',
+      label: ',',
       onClick: (e) => updapteMathematicalExpression(e),
-      value: '.'
+      value: ','
     },
     {
       label: '=',
@@ -123,24 +125,52 @@ const App = () => {
   ] as KeyboardKeyProps[]
 
   useEffect(() => {
-    console.log('useEffect', typeof mathematicalExpression)
-  }, [mathematicalExpression])
+    if (isThisVoiceButtonRequest) setTimeout(calculateTheResult, 1500)
+
+    return () => {
+      setIsThisVoiceButtonRequest(false)
+    }
+  }, [isThisVoiceButtonRequest])
 
   const calculateTheResult = (): void => {
     if (!mathematicalExpression) return
 
     try {
-      const result = math.evaluate(mathematicalExpression)
+      const formatMathematicalExpression = mathematicalExpression.replaceAll('x', '*').replaceAll(',', '.')
+      const result = math.evaluate(formatMathematicalExpression)
       const roundResult = math.round(result, 2)
+      const finalResult = roundResult.toString().replace('.', ',')
 
-      setMathematicalExpression(math.evaluate(roundResult).toString())
+      setMathematicalExpression(finalResult)
     } catch(error) {
       setMathematicalExpression('Error')
     }
   }
+
+  // const calculateTheResult = useCallback((): void => {
+  //   if (!mathematicalExpression) return
+
+  //   try {
+  //     const formatMathematicalExpression = mathematicalExpression.replaceAll('x', '*').replaceAll(',', '.')
+  //     const result = math.evaluate(formatMathematicalExpression)
+  //     const roundResult = math.round(result, 2)
+  //     const finalResult = roundResult.toString().replace('.', ',')
+
+  //     setMathematicalExpression(finalResult)
+  //   } catch(error) {
+  //     setMathematicalExpression('Error')
+  //   }
+  // }, [math, mathematicalExpression])
+
+  // useEffect(() => {
+  //   if (isThisVoiceButtonRequest) setTimeout(calculateTheResult, 1500)
+
+  //   return () => {
+  //     setIsThisVoiceButtonRequest(false)
+  //   }
+  // }, [isThisVoiceButtonRequest])
   
   const clearLastCharacter = (): void => {
-    console.log('clearLastCharacter', typeof mathematicalExpression)
     setMathematicalExpression(mathematicalExpression.slice(0, -1))
   }
 
@@ -184,7 +214,10 @@ const App = () => {
           />
           <CalculatorKeyboard keyboardKeys={keyboardKeys} />
         </Calculator>
-        <VoiceButton setMathematicalExpression={setMathematicalExpression} />
+        <VoiceButton
+          setIsThisVoiceButtonRequest={setIsThisVoiceButtonRequest}
+          setMathematicalExpression={setMathematicalExpression}
+        />
       </x.div>
     </AppWrapper>
   )
