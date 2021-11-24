@@ -1,6 +1,6 @@
-import styled, { useColorMode } from "@xstyled/styled-components"
+import styled, { useColorMode } from '@xstyled/styled-components'
 
-import Toggle from "./Toogle"
+import Toggle from './Toogle'
 
 const InnerDarkModeToggle = styled.navBox`
   display: flex;
@@ -30,14 +30,14 @@ const DarkModeToggle = () => {
 
   return (
     <InnerDarkModeToggle>
-      <button onClick={() => setColorMode("default")}>
+      <button onClick={() => setColorMode('default')}>
         ☀
       </button>
       <Toggle
-        checked={mode === "dark"}
-        onChange={() => setColorMode(mode === "dark" ? "default" : "dark")}
+        checked={mode === 'dark'}
+        onChange={() => setColorMode(mode === 'dark' ? 'default' : 'dark')}
       />
-      <button type="button" onClick={() => setColorMode("dark")}>
+      <button type="button" onClick={() => setColorMode('dark')}>
         ☾
       </button>
     </InnerDarkModeToggle>

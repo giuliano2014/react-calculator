@@ -43,19 +43,7 @@ const VoiceButton: VFC<VoiceButtonProps> = ({ setIsThisVoiceButtonRequest, setMa
   ] as Command[]
 
   const { listening } = useSpeechRecognition({ commands })
-
   const { browserSupportsSpeechRecognition, startListening } = SpeechRecognition
-
-  if (!browserSupportsSpeechRecognition()) {
-    console.log('Your browser does not support speech recognition software ! Try Chrome desktop, maybe ?')
-  }
-
-  const listenContinuously = () => {
-    startListening({
-      // continuous: true,
-      // language: 'en-GB',
-    })
-  }
 
   return (
     <Content
@@ -63,27 +51,32 @@ const VoiceButton: VFC<VoiceButtonProps> = ({ setIsThisVoiceButtonRequest, setMa
       display="flex"
       flexDirection="column"
     >
-      <x.p paddingTop={{ _: 30, sm: 50 }}>{listening ? 'Dites: "Super calculatrice, combien font : 2 + 3 x 5"' : 'Cliquez sur le bouton'}</x.p>
-      <x.div
-        marginTop="25"
-        position="relative"
-      >
-        {listening &&
-          <x.div
-            backgroundColor="red"
-            borderRadius="50%"
-            h="10px"
-            position="absolute"
-            right="15px"
-            top="2px"
-            w="10px"
-          ></x.div>
-        }
-        <MdKeyboardVoice
-          className="voiceIcon"
-          onClick={listenContinuously}
-        />
-      </x.div>
+      {!browserSupportsSpeechRecognition()
+        ? <x.p paddingTop={{ _: 30, sm: 50 }}>Your browser does not support speech recognition software ! Try Chrome desktop, maybe ?</x.p>
+        : <>
+            <x.p paddingTop={{ _: 30, sm: 50 }}>{listening ? 'Dites: "Super calculatrice, combien font : 2 + 3 x 5"' : 'Cliquez sur le bouton'}</x.p>
+            <x.div
+              marginTop="25"
+              position="relative"
+            >
+              {listening &&
+                <x.div
+                  backgroundColor="red"
+                  borderRadius="50%"
+                  h="10px"
+                  position="absolute"
+                  right="15px"
+                  top="2px"
+                  w="10px"
+                ></x.div>
+              }
+              <MdKeyboardVoice
+                className="voiceIcon"
+                onClick={() => startListening()}
+              />
+            </x.div>
+          </>
+      }
     </Content>
   )
 }
